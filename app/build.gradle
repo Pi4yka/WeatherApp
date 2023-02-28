@@ -56,4 +56,6 @@ dependencies {
 
     //KOIN
     implementation "io.insert-koin:koin-android:3.3.3"
+    implementation "io.insert-koin:koin-core:3.3.3"
+
 }
