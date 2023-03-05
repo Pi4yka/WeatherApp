@@ -21,7 +21,7 @@ class MainViewModel(private val weatherRepo: WeatherRepository) : ViewModel() {
 
     fun getWeatherCity(city: String){
         viewModelScope.launch(Dispatchers.IO){
-            when (val response = weatherRepo.getCityWeather(city)) {
+            when (val response = weatherRepo.getCityWeather(city, apiKey = "16c97ca138fc98a27271d4bea4b8b4b3")) {
                 is RequestResult.Success -> {
                     weather.postValue(response.data.temp.toString())
                 }

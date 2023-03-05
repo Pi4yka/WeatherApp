@@ -12,10 +12,10 @@ val forecastModule = module {
 }
 
 class WeatherRepositoryImpl(private val weatherService: WeatherService): WeatherRepository {
-    override suspend fun getCityWeather(city: String): RequestResult<WeatherResponse>{
+    override suspend fun getCityWeather(city: String, apiKey: String): RequestResult<WeatherResponse>{
         return withContext(Dispatchers.IO) {
             try {
-                RequestResult.Success(weatherService.getWeather(city))
+                RequestResult.Success(weatherService.getWeather(city, apiKey))
             } catch (e: Exception) {
                 RequestResult.Error(e.message.orEmpty())
             }
