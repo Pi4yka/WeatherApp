@@ -1,14 +1,9 @@
 package com.example.weatherapp.data.remote.weather.repository
 
 import com.example.weatherapp.data.remote.weather.entity.WeatherResponse
-import com.example.weatherapp.data.remote.weather.service.WeatherService
 import com.example.weatherapp.util.RequestResult
-import org.koin.dsl.module
+import okhttp3.Request
 
-val forecastModule = module{
-    factory {WeatherRepository(get())}
-}
-
-class WeatherRepository(private val weatherApi: WeatherService) {
-    suspend fun getWeather() = weatherApi.getWeather()
+interface WeatherRepository {
+    suspend fun getCityWeather(city: String): RequestResult<WeatherResponse>
 }

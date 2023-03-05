@@ -1,0 +1,45 @@
+package com.example.weatherapp.data.remote.weather.service
+
+import com.example.weatherapp.data.remote.weather.repository.WeatherRepository
+import com.example.weatherapp.data.remote.weather.repository.WeatherRepositoryImpl
+import com.example.weatherapp.util.RequestResult
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+val networkModule = module {
+
+    single { provideOkHttpClient() }
+    single { provideRetrofit(get(),get()) }
+    factory { provideGson() }
+    single { provideWeatherService(get()) }
+    single { provideWeatherRepository(get()) }
+
+}
+
+fun provideOkHttpClient(): OkHttpClient {
+    val loggingInterceptor = HttpLoggingInterceptor()
+    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+    return OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .build()
+}
+
+fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit{
+    return Retrofit.Builder()
+        .baseUrl("https://api.openweathermap.org/data/2.5/")
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
+}
+
+fun provideGson(): Gson = GsonBuilder().create()
+
+fun provideWeatherService(retrofit: Retrofit): WeatherService =
+    retrofit.create(WeatherService::class.java)
+
+fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository = WeatherRepositoryImpl(weatherService)
