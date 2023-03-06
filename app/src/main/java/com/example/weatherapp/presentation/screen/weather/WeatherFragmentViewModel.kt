@@ -1,27 +1,26 @@
-package com.example.weatherapp
+package com.example.weatherapp.presentation.screen.weather
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.remote.weather.repository.WeatherRepository
-import com.example.weatherapp.data.remote.weather.service.WeatherService
 import com.example.weatherapp.util.RequestResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModelModule = module {
-    single { MainViewModel(get()) }
-}
-
-class MainViewModel(private val weatherRepo: WeatherRepository) : ViewModel() {
+class WeatherFragmentViewModel(private val weatherRepo: WeatherRepository) : ViewModel() {
 
     val weather: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    fun getWeatherCity(city: String){
-        viewModelScope.launch(Dispatchers.IO){
-            when (val response = weatherRepo.getCityWeather(city, apiKey = "16c97ca138fc98a27271d4bea4b8b4b3")) {
+    fun getWeatherCity(city: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val response =
+                weatherRepo.getCityWeather(city, apiKey = "16c97ca138fc98a27271d4bea4b8b4b3")) {
                 is RequestResult.Success -> {
                     weather.postValue(response.data.temp.toString())
                 }
@@ -32,7 +31,5 @@ class MainViewModel(private val weatherRepo: WeatherRepository) : ViewModel() {
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+
 }

@@ -7,10 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.dsl.module
 
-val forecastModule = module {
-    single {WeatherRepositoryImpl(get())}
-}
-
 class WeatherRepositoryImpl(private val weatherService: WeatherService): WeatherRepository {
     override suspend fun getCityWeather(city: String, apiKey: String): RequestResult<WeatherResponse>{
         return withContext(Dispatchers.IO) {

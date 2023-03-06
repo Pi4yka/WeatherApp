@@ -11,15 +11,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val networkModule = module {
-
-    single { provideOkHttpClient() }
-    single { provideRetrofit(get(),get()) }
-    factory { provideGson() }
-    single { provideWeatherService(get()) }
-    single { provideWeatherRepository(get()) }
-
-}
 
 fun provideOkHttpClient(): OkHttpClient {
     val loggingInterceptor = HttpLoggingInterceptor()
