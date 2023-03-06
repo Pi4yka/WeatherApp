@@ -37,14 +37,11 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         viewModel.weather.observe(viewLifecycleOwner, weatherResultObserver)
 
-        bindingWeatherFragment.button.setOnClickListener {
-            clickButton()
-
-        }
+        getWeather()
     }
 
-    private fun clickButton() {
-        val city = "Moscow"
+    private fun getWeather() {
+        val city = "Dmitrov"
         viewModel.getWeatherCity(city)
     }
 
