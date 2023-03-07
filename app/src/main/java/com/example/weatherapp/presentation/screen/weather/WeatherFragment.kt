@@ -36,12 +36,22 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         }
 
         viewModel.weather.observe(viewLifecycleOwner, weatherResultObserver)
+        getWeather("Dedenevo")
 
-        getWeather()
+        bindingWeatherFragment.button.setOnClickListener {
+            if (isInputEmpty()){
+                getWeather(bindingWeatherFragment.editText.text.toString())
+            }
+            else {
+                getWeather("Moscow")
+            }
+        }
     }
 
-    private fun getWeather() {
-        val city = "Dmitrov"
+    private fun isInputEmpty(): Boolean =
+        bindingWeatherFragment.editText.text.toString().isNotEmpty()
+
+    private fun getWeather(city: String) {
         viewModel.getWeatherCity(city)
     }
 
