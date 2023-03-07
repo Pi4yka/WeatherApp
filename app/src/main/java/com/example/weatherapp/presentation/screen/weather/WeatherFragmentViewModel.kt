@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.data.remote.weather.entity.toModel
 import com.example.weatherapp.data.remote.weather.repository.WeatherRepository
+import com.example.weatherapp.presentation.screen.weather.entity.WeatherModel
 import com.example.weatherapp.util.RequestResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,16 +15,18 @@ import org.koin.dsl.module
 
 class WeatherFragmentViewModel(private val weatherRepo: WeatherRepository) : ViewModel() {
 
-    val weather: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    val weather: MutableLiveData<WeatherModel> by lazy {
+        MutableLiveData<WeatherModel>()
     }
 
     fun getWeatherCity(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response =
-                weatherRepo.getCityWeather(city, apiKey = "16c97ca138fc98a27271d4bea4b8b4b3")) {
+            when (val response = weatherRepo.getCityWeather(
+                city = city,
+                apiKey = "16c97ca138fc98a27271d4bea4b8b4b3"
+            )) {
                 is RequestResult.Success -> {
-                    weather.postValue(response.data.temp.toString())
+                    weather.postValue(response.data.toModel()) // подписываться на модельку
                 }
                 is RequestResult.Error -> {
                     Log.d("TTT", response.message)

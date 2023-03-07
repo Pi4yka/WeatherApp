@@ -11,14 +11,29 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val appModule: Module = module {
-    factory {MainActivity()}
-    factory {WeatherFragment()}
+
     single { provideOkHttpClient() }
-    single { provideRetrofit(get(),get()) }
     factory { provideGson() }
-    single { provideWeatherService(get()) }
-    single { provideWeatherRepository(get()) }
-    single { WeatherRepositoryImpl(get()) }
-    viewModel {WeatherFragmentViewModel(get())}
+    single {
+        provideRetrofit(
+            gson = get(),
+            okHttpClient = get()
+        )
+    }
+    single {
+        provideWeatherService(
+            retrofit = get()
+        )
+    }
+    single {
+        provideWeatherRepository(
+            weatherService = get()
+        )
+    }
+    viewModel {
+        WeatherFragmentViewModel(
+            weatherRepo = get()
+        )
+    }
 
 }

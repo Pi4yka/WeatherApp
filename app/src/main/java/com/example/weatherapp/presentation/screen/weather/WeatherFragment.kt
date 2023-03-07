@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentWeatherBinding
+import com.example.weatherapp.presentation.screen.weather.entity.WeatherModel
 import org.koin.android.ext.android.inject
 import org.koin.dsl.module
 
@@ -17,7 +18,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
     private var _binding: FragmentWeatherBinding? = null
     private val bindingWeatherFragment get() = _binding!!
-    val viewModel: WeatherFragmentViewModel by inject()
+    private val viewModel: WeatherFragmentViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +47,10 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
                 getWeather("Moscow")
             }
         }
+    }
+
+    private fun updateUi(weatherModel: WeatherModel) {
+
     }
 
     private fun isInputEmpty(): Boolean =
