@@ -5,5 +5,6 @@ import com.example.weatherapp.util.RequestResult
 import okhttp3.Request
 
 interface WeatherRepository {
-    suspend fun getCityWeather(city: String, apiKey: String): RequestResult<WeatherResponse>
+    suspend fun getCityWeather(city: String): RequestResult<WeatherResponse>
+
 }

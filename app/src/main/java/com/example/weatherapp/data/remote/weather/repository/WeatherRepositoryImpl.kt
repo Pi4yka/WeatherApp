@@ -8,13 +8,14 @@ import kotlinx.coroutines.withContext
 import org.koin.dsl.module
 
 class WeatherRepositoryImpl(private val weatherService: WeatherService): WeatherRepository {
-    override suspend fun getCityWeather(city: String, apiKey: String): RequestResult<WeatherResponse>{
+    override suspend fun getCityWeather(city: String): RequestResult<WeatherResponse>{
         return withContext(Dispatchers.IO) {
             try {
-                RequestResult.Success(weatherService.getWeather(city, apiKey))
+                RequestResult.Success(weatherService.getWeatherCity(city))
             } catch (e: Exception) {
                 RequestResult.Error(e.message.orEmpty())
             }
         }
     }
+
 }

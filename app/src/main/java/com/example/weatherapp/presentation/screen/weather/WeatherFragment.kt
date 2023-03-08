@@ -32,19 +32,19 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weatherResultObserver = Observer<String> { weather ->
-            bindingWeatherFragment.textView.text = weather
+        val weatherResultObserver = Observer<WeatherModel> { weather ->
+            bindingWeatherFragment.textView.text = weather.toString()
         }
 
         viewModel.weather.observe(viewLifecycleOwner, weatherResultObserver)
-        getWeather("Dedenevo")
+        getWeatherCity("Dedenevo")
 
-        bindingWeatherFragment.button.setOnClickListener {
+        bindingWeatherFragment.getCityButton.setOnClickListener {
             if (isInputEmpty()){
-                getWeather(bindingWeatherFragment.editText.text.toString())
+                getWeatherCity(bindingWeatherFragment.editText.text.toString())
             }
             else {
-                getWeather("Moscow")
+                getWeatherCity("Moscow")
             }
         }
     }
@@ -56,9 +56,13 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private fun isInputEmpty(): Boolean =
         bindingWeatherFragment.editText.text.toString().isNotEmpty()
 
-    private fun getWeather(city: String) {
+    private fun getWeatherCity(city: String) {
         viewModel.getWeatherCity(city)
     }
+
+//    private fun getWeatherLocation(){
+//        viewModel.getWeatherLocation()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

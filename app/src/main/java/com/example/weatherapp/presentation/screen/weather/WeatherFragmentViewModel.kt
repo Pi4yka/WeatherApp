@@ -22,8 +22,7 @@ class WeatherFragmentViewModel(private val weatherRepo: WeatherRepository) : Vie
     fun getWeatherCity(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = weatherRepo.getCityWeather(
-                city = city,
-                apiKey = "16c97ca138fc98a27271d4bea4b8b4b3"
+                city = city
             )) {
                 is RequestResult.Success -> {
                     weather.postValue(response.data.toModel()) // подписываться на модельку
