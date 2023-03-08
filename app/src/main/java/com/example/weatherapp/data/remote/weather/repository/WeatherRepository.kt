@@ -7,4 +7,5 @@ import okhttp3.Request
 interface WeatherRepository {
     suspend fun getCityWeather(city: String): RequestResult<WeatherResponse>
 
+    suspend fun  getLocationWeather(lat: Double, lon: Double): RequestResult<WeatherResponse>
 }

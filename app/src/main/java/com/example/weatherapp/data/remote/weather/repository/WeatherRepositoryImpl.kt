@@ -18,4 +18,14 @@ class WeatherRepositoryImpl(private val weatherService: WeatherService): Weather
         }
     }
 
+    override suspend fun getLocationWeather(lat: Double, lon: Double): RequestResult<WeatherResponse> {
+        return withContext(Dispatchers.IO) {
+            try {
+                RequestResult.Success(weatherService.getWeatherLocation(lat, lon))
+            } catch (e: Exception) {
+                RequestResult.Error(e.message.orEmpty())
+            }
+        }
+    }
+
 }

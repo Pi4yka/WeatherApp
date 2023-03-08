@@ -12,6 +12,7 @@ import org.koin.dsl.module
 
 val appModule: Module = module {
 
+    factory { MainActivity() }
     single { provideOkHttpClient() }
     factory { provideGson() }
     single {

@@ -4,17 +4,11 @@ import com.example.weatherapp.presentation.screen.weather.entity.WeatherModel
 import com.google.gson.annotations.SerializedName
 
 data class WeatherResponse(
-    @SerializedName("main") val temp: TempData,
-    val name: String
-) {
-    data class TempData(
-        val temp: Double,
-        val humidity: Int
-    )
-}
+    @SerializedName("main") val temp: Double
+)
 
 fun WeatherResponse.toModel(): WeatherModel {
     return WeatherModel(
-        temp = this.temp.temp.toInt().toString()
+        temp = this.temp.toInt().toString()
     )
 }

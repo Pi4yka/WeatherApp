@@ -1,6 +1,9 @@
 package com.example.weatherapp.presentation.screen.weather
 
+import android.location.LocationListener
+import android.location.LocationManager
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,6 +27,19 @@ class WeatherFragmentViewModel(private val weatherRepo: WeatherRepository) : Vie
             when (val response = weatherRepo.getCityWeather(
                 city = city
             )) {
+                is RequestResult.Success -> {
+                    weather.postValue(response.data.toModel()) // подписываться на модельку
+                }
+                is RequestResult.Error -> {
+                    Log.d("TTT", response.message)
+                }
+            }
+        }
+    }
+
+    fun getWeatherLocation(lat: Double, lon: Double){
+        viewModelScope.launch(Dispatchers.IO){
+            when (val response = weatherRepo.getLocationWeather(lat, lon)) {
                 is RequestResult.Success -> {
                     weather.postValue(response.data.toModel()) // подписываться на модельку
                 }
