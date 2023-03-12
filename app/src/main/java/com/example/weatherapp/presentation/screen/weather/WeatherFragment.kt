@@ -19,6 +19,7 @@ import com.example.weatherapp.presentation.screen.MainActivity
 import com.example.weatherapp.presentation.screen.weather.entity.WeatherModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.getActivityViewModel
@@ -50,7 +51,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             bindingWeatherFragment.weatherTemperature.text = "${weather.temp}°C"
             bindingWeatherFragment.descHumidity.text = weather.humidity
             bindingWeatherFragment.descPressure.text = weather.pressure
-            bindingWeatherFragment.descWind.text = weather.windSpeed
+            bindingWeatherFragment.descWind.text = weather.windSpeed+" m/s"
         }
 
         viewModel.weather.observe(viewLifecycleOwner, weatherResultObserver)
@@ -61,9 +62,10 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         bindingWeatherFragment.icSearchBtn.setOnClickListener {
             if (isInputEmpty()) {
+                bindingWeatherFragment.descWeather.visibility = View.VISIBLE
                 getWeatherCity(bindingWeatherFragment.editCity.text.toString())
             } else {
-                getWeatherCity("Moscow")
+                Snackbar.make(requireView(), "Enter city!", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

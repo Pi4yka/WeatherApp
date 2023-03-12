@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
-            android:hint="city"
+            android:hint="@string/enter_city"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/icSearchBtn"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchCity" />
 
+
     <TextView
         android:id="@+id/weatherTemperature"
         android:layout_width="wrap_content"
@@ -63,10 +64,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/getLocationButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherTemperature">
+        app:layout_constraintTop_toBottomOf="@+id/weatherTemperature"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/descHumidityContainer"
@@ -81,16 +84,30 @@
                 android:id="@+id/descHumidity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/descHumiditySignature"
+                android:textAlignment="center"
+                tools:text="100"
+                app:layout_constraintBottom_toTopOf="@+id/icHumidity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icHumidity"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_humidity"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/descHumiditySignature"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="19dp" />
 
             <TextView
                 android:id="@+id/descHumiditySignature"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="humidity"
+                android:text="@string/humidity"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -109,16 +126,29 @@
                 android:id="@+id/descWind"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/descWindSignature"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/icWind"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text = "5.25 m/s"/>
+
+            <ImageView
+                android:id="@+id/icWind"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_wind"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/descWindSignature"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/descWindSignature"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="wind"
+                android:text="@string/wind_speed"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -137,16 +167,30 @@
                 android:id="@+id/descPressure"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/icPressure"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text = "983"/>
+
+            <ImageView
+                android:id="@+id/icPressure"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:textAlignment="center"
+                android:src="@drawable/ic_pressure"
                 app:layout_constraintBottom_toTopOf="@+id/descPressureSignature"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                />
 
             <TextView
                 android:id="@+id/descPressureSignature"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="pressure"
+                android:text="@string/pressure"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
