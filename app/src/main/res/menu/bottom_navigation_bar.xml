@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_navigationbar_weather"
+        android:title="Weather"
+        android:icon="@drawable/ic_weather_bottom_nav_bar"/>
+
+    <item
+        android:id="@+id/bottom_navigationbar_moon"
+        android:title="Moon"
+        android:icon="@drawable/ic_moon_bottom_nav_bar"/>
+    <item
+        android:id="@+id/bottom_navigationbar_astrology"
+        android:title="Astrology"
+        android:icon="@drawable/ic_astrology_bottom_nav_bar"/>
+</menu>
