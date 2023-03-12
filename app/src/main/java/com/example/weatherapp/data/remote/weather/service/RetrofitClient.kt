@@ -20,17 +20,15 @@ fun provideOkHttpClient(): OkHttpClient {
         .build()
 }
 
-fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit{
-    return Retrofit.Builder()
+fun provideGson(): Gson = GsonBuilder().create()
+
+fun provideWeatherService(okHttpClient: OkHttpClient, gson: Gson): WeatherService =
+    Retrofit.Builder()
         .baseUrl("https://api.openweathermap.org/data/2.5/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
-}
+        .create(WeatherService::class.java)
 
-fun provideGson(): Gson = GsonBuilder().create()
-
-fun provideWeatherService(retrofit: Retrofit): WeatherService =
-    retrofit.create(WeatherService::class.java)
-
-fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository = WeatherRepositoryImpl(weatherService)
+fun provideWeatherRepository(weatherService: WeatherService): WeatherRepository =
+    WeatherRepositoryImpl(weatherService)

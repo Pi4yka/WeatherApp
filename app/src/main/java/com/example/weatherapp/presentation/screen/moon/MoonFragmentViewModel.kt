@@ -23,7 +23,7 @@ class MoonFragmentViewModel(private val moonRepo: MoonRepository) : ViewModel() 
                 dateUnix = dateUnix
             )) {
                 is RequestResult.Success -> {
-                    moon.postValue(response.data.toModel()) // подписываться на модельку
+                    moon.postValue(response.data.firstOrNull()?.toModel()) // подписываться на модельку
                 }
                 is RequestResult.Error -> {
                     Log.d("TTT", response.message)

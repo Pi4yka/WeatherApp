@@ -41,7 +41,7 @@ class WeatherFragmentViewModel(private val weatherRepo: WeatherRepository) : Vie
         viewModelScope.launch(Dispatchers.IO){
             when (val response = weatherRepo.getLocationWeather(lat, lon)) {
                 is RequestResult.Success -> {
-                    weather.postValue(response.data.toModel()) // подписываться на модельку
+                    weather.postValue(response.data.toModel())
                 }
                 is RequestResult.Error -> {
                     Log.d("TTT", response.message)

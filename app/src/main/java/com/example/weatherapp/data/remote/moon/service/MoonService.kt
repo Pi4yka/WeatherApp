@@ -8,6 +8,6 @@ interface MoonService {
     @GET("moonphases/")
     suspend fun getMoonPhase(
         @Query("d") dateUnix: Long,
-    ): MoonResponse
+    ): List<MoonResponse>
 
 }

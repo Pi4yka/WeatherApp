@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MoonRepositoryImpl(private val moonService: MoonService): MoonRepository {
-    override suspend fun getMoonPhase(dateUnix: Long): RequestResult<MoonResponse> {
+    override suspend fun getMoonPhase(dateUnix: Long): RequestResult<List<MoonResponse>> {
             return withContext(Dispatchers.IO){
                 try{
                     RequestResult.Success(moonService.getMoonPhase(dateUnix))

@@ -1,29 +1,20 @@
 package com.example.weatherapp.presentation.screen.weather
 
-import android.app.Activity
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentWeatherBinding
-import com.example.weatherapp.presentation.screen.MainActivity
 import com.example.weatherapp.presentation.screen.weather.entity.WeatherModel
+import com.example.weatherapp.util.PermissionUtil.checkLocationPermission
+import com.example.weatherapp.util.PermissionUtil.requestLocationPermission
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.getActivityViewModel
-import org.koin.dsl.module
 
 
 class WeatherFragment : Fragment(R.layout.fragment_weather) {
@@ -51,7 +42,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             bindingWeatherFragment.weatherTemperature.text = "${weather.temp}°C"
             bindingWeatherFragment.descHumidity.text = weather.humidity
             bindingWeatherFragment.descPressure.text = weather.pressure
-            bindingWeatherFragment.descWind.text = weather.windSpeed+" m/s"
+            bindingWeatherFragment.descWind.text = weather.windSpeed + " m/s"
         }
 
         viewModel.weather.observe(viewLifecycleOwner, weatherResultObserver)
@@ -86,22 +77,18 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     }
 
     private fun getLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireContext() as Activity,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                101
-            )
+        if (requireContext().checkLocationPermission()) {
+            requireActivity().requestLocationPermission()
         }
 
+        if (requireContext().checkLocationPermission()) {
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                viewModel.getWeatherLocation(
+                    lat = it.latitude,
+                    lon = it.longitude
+                )
+            }
+        }
     }
 
     override fun onDestroyView() {

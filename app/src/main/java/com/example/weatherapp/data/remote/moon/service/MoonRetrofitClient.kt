@@ -17,17 +17,14 @@ fun provideOkHttpClientMoon(): OkHttpClient {
         .build()
 }
 
-fun provideRetrofitMoon(gsonMoon: Gson, okHttpClientMoon: OkHttpClient): Retrofit {
-    return Retrofit.Builder()
-        .baseUrl("https://api.farmsense.net/v1/")
-        .client(okHttpClientMoon)
-        .addConverterFactory(GsonConverterFactory.create(gsonMoon))
-        .build()
-}
-
 fun provideGsonMoon(): Gson = GsonBuilder().create()
 
-fun provideMoonService(retrofitMoon: Retrofit): MoonService =
-    retrofitMoon.create(MoonService::class.java)
+fun provideMoonService(okHttpClient: OkHttpClient, gson: Gson): MoonService =
+    Retrofit.Builder()
+        .baseUrl("https://api.farmsense.net/v1/")
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
+        .create(MoonService::class.java)
 
 fun provideMoonRepository(moonService: MoonService): MoonRepository = MoonRepositoryImpl(moonService)

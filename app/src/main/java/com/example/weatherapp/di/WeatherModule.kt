@@ -11,14 +11,9 @@ val weatherModule: Module = module {
     single { provideOkHttpClient() }
     factory { provideGson() }
     single {
-        provideRetrofit(
-            gson = get(),
-            okHttpClient = get()
-        )
-    }
-    single {
         provideWeatherService(
-            retrofit = get()
+            okHttpClient = get(),
+            gson = get()
         )
     }
     single {

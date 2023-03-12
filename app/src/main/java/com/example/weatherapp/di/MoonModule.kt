@@ -11,14 +11,9 @@ val moonModule: Module = module {
     single { provideOkHttpClientMoon() }
     factory { provideGsonMoon() }
     single {
-        provideRetrofitMoon(
-            gsonMoon = get(),
-            okHttpClientMoon = get()
-        )
-    }
-    single {
         provideMoonService(
-            retrofitMoon = get()
+            okHttpClient = get(),
+            gson = get()
         )
     }
     single {
