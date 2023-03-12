@@ -47,7 +47,10 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         super.onViewCreated(view, savedInstanceState)
 
         val weatherResultObserver = Observer<WeatherModel> { weather ->
-            bindingWeatherFragment.textView.text = weather.toString()
+            bindingWeatherFragment.weatherTemperature.text = "${weather.temp}°C"
+            bindingWeatherFragment.descHumidity.text = weather.humidity
+            bindingWeatherFragment.descPressure.text = weather.pressure
+            bindingWeatherFragment.descWind.text = weather.windSpeed
         }
 
         viewModel.weather.observe(viewLifecycleOwner, weatherResultObserver)
@@ -56,9 +59,9 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
             getLocation()
         }
 
-        bindingWeatherFragment.getCityButton.setOnClickListener {
+        bindingWeatherFragment.icSearchBtn.setOnClickListener {
             if (isInputEmpty()) {
-                getWeatherCity(bindingWeatherFragment.editText.text.toString())
+                getWeatherCity(bindingWeatherFragment.editCity.text.toString())
             } else {
                 getWeatherCity("Moscow")
             }
@@ -70,7 +73,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     }
 
     private fun isInputEmpty(): Boolean =
-        bindingWeatherFragment.editText.text.toString().isNotEmpty()
+        bindingWeatherFragment.editCity.text.toString().isNotEmpty()
 
     private fun getWeatherCity(city: String) {
         viewModel.getWeatherCity(city)

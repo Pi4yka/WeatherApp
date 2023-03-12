@@ -8,9 +8,8 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherapp.presentation.screen.moon.MoonFragment
 import com.example.weatherapp.presentation.screen.weather.WeatherFragment
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import org.koin.dsl.module
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +22,16 @@ class MainActivity : AppCompatActivity() {
         val view = bindingMainActivity.root
         setContentView(view)
         setCurrentFragment(WeatherFragment())
+
+        bindingMainActivity.bottomNavigationBar.setOnItemSelectedListener {
+            when (it.itemId) {
+                bindingMainActivity.bottomNavigationBar.selectedItemId -> {}
+                R.id.bottom_navigationbar_weather -> setCurrentFragment(WeatherFragment())
+                R.id.bottom_navigationbar_moon -> setCurrentFragment(MoonFragment())
+                R.id.bottom_navigationbar_astrology -> setCurrentFragment(WeatherFragment())
+            }
+            true
+        }
     }
 
     private fun setCurrentFragment(
