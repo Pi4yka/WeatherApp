@@ -15,7 +15,8 @@ class App : Application() {
             modules(
                 listOf(
                     weatherModule,
-                    moonModule
+                    moonModule,
+                    astrologyModule
                 )
             )
         }

@@ -49,7 +49,6 @@ class MoonFragment : Fragment(R.layout.moon_fragment) {
         Log.d("TTT", "${date}")
     }
 
-
     private fun getMoonPhase(dateUnix: Long) {
         viewModel.getMoonPhase(dateUnix)
     }
