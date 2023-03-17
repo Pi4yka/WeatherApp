@@ -62,4 +62,10 @@ dependencies {
 
     //FusedLocationProviderClient
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    //NavGraph
+//    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
+//    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 }

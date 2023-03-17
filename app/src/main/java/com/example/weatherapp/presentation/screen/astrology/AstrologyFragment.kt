@@ -36,7 +36,7 @@ class AstrologyFragment: Fragment(R.layout.astrology_fragment){
         viewModel.horoscope.observe(viewLifecycleOwner, horoscopeResultObserver)
 
         bindingAstrologyFragment.btnAstrology.setOnClickListener {
-            viewModel.getHoroscope("taurus")
+            viewModel.getHoroscope("aries")
         }
     }
 }
