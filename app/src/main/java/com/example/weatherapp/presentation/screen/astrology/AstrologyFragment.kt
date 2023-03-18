@@ -35,8 +35,23 @@ class AstrologyFragment: Fragment(R.layout.astrology_fragment){
 
         viewModel.horoscope.observe(viewLifecycleOwner, horoscopeResultObserver)
 
-        bindingAstrologyFragment.btnAstrology.setOnClickListener {
+        bindingAstrologyFragment.signAries.setOnClickListener{
             viewModel.getHoroscope("aries")
+        }
+        bindingAstrologyFragment.signAquarius.setOnClickListener{
+            viewModel.getHoroscope("aquarius")
+        }
+        bindingAstrologyFragment.signCancer.setOnClickListener{
+            viewModel.getHoroscope("cancer")
+        }
+        bindingAstrologyFragment.signCapricorn.setOnClickListener{
+            viewModel.getHoroscope("capricorn")
+        }
+        bindingAstrologyFragment.signGemini.setOnClickListener{
+            viewModel.getHoroscope("gemini")
+        }
+        bindingAstrologyFragment.signLeo.setOnClickListener{
+            viewModel.getHoroscope("leo")
         }
     }
 }
