@@ -11,7 +11,7 @@ import org.koin.android.ext.android.inject
 import com.example.weatherapp.databinding.AstrologyFragmentBinding
 import com.example.weatherapp.presentation.screen.astrology.entity.AstrologyModel
 
-class AstrologyFragment: Fragment(R.layout.astrology_fragment){
+class AstrologyFragment : Fragment(R.layout.astrology_fragment) {
 
     private var _binding: AstrologyFragmentBinding? = null
     private val bindingAstrologyFragment get() = _binding!!
@@ -22,7 +22,7 @@ class AstrologyFragment: Fragment(R.layout.astrology_fragment){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AstrologyFragmentBinding.inflate(inflater,container,false)
+        _binding = AstrologyFragmentBinding.inflate(inflater, container, false)
         return bindingAstrologyFragment.root
     }
 
@@ -33,24 +33,24 @@ class AstrologyFragment: Fragment(R.layout.astrology_fragment){
             bindingAstrologyFragment.descAstrology.text = horoscope.descAstro
         }
 
-        viewModel.horoscope.observe(viewLifecycleOwner, horoscopeResultObserver)
+        viewModel.astrology.observe(viewLifecycleOwner, horoscopeResultObserver)
 
-        bindingAstrologyFragment.signAries.setOnClickListener{
+        bindingAstrologyFragment.signAries.setOnClickListener {
             viewModel.getHoroscope("aries")
         }
-        bindingAstrologyFragment.signAquarius.setOnClickListener{
+        bindingAstrologyFragment.signAquarius.setOnClickListener {
             viewModel.getHoroscope("aquarius")
         }
-        bindingAstrologyFragment.signCancer.setOnClickListener{
+        bindingAstrologyFragment.signCancer.setOnClickListener {
             viewModel.getHoroscope("cancer")
         }
-        bindingAstrologyFragment.signCapricorn.setOnClickListener{
+        bindingAstrologyFragment.signCapricorn.setOnClickListener {
             viewModel.getHoroscope("capricorn")
         }
-        bindingAstrologyFragment.signGemini.setOnClickListener{
+        bindingAstrologyFragment.signGemini.setOnClickListener {
             viewModel.getHoroscope("gemini")
         }
-        bindingAstrologyFragment.signLeo.setOnClickListener{
+        bindingAstrologyFragment.signLeo.setOnClickListener {
             viewModel.getHoroscope("leo")
         }
     }

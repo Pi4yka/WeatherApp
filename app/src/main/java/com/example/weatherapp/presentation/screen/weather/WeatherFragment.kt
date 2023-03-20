@@ -1,6 +1,7 @@
 package com.example.weatherapp.presentation.screen.weather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,12 +50,13 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
 
         bindingWeatherFragment.getLocationButton.setOnClickListener {
             getLocation()
+            bindingWeatherFragment.descWeather.visibility = View.VISIBLE
         }
 
         bindingWeatherFragment.icSearchBtn.setOnClickListener {
             if (isInputEmpty()) {
                 bindingWeatherFragment.descWeather.visibility = View.VISIBLE
-                getWeatherCity(bindingWeatherFragment.editCity.text.toString())
+                viewModel.getWeatherCity(bindingWeatherFragment.editCity.text.toString())
             } else {
                 Snackbar.make(requireView(), "Enter city!", Snackbar.LENGTH_SHORT).show()
             }
@@ -68,25 +70,19 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private fun isInputEmpty(): Boolean =
         bindingWeatherFragment.editCity.text.toString().isNotEmpty()
 
-    private fun getWeatherCity(city: String) {
-        viewModel.getWeatherCity(city)
-    }
-
-    private fun getWeatherLocation(lat: Double, lon: Double) {
-        viewModel.getWeatherLocation(lat, lon)
-    }
-
     private fun getLocation() {
         if (requireContext().checkLocationPermission()) {
             requireActivity().requestLocationPermission()
         }
-
-        if (requireContext().checkLocationPermission()) {
+        if (requireContext().checkLocationPermission()) { // 13 android v govne
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-                viewModel.getWeatherLocation(
-                    lat = it.latitude,
-                    lon = it.longitude
-                )
+//                Log.d("TTT", "${it.latitude} and ${it.longitude}")
+                if (it != null) {
+                    viewModel.getWeatherLocation(
+                        lat = it.latitude,
+                        lon = it.longitude
+                    )
+                }
             }
         }
     }

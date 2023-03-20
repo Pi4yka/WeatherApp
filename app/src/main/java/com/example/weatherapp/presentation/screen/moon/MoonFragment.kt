@@ -5,8 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.alpha
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.MoonFragmentBinding
 import com.example.weatherapp.presentation.screen.moon.entity.MoonModel
@@ -35,22 +38,12 @@ class MoonFragment : Fragment(R.layout.moon_fragment) {
             bindingMoonFragment.moonPhase.text = moon.moonPhase
         }
 
-        val unixTime = System.currentTimeMillis()
+        val moonImageResultObserver = Observer<Int> {
+            moonImage -> bindingMoonFragment.phaseMoonImage.setImageResource(moonImage)
+        }
 
         viewModel.moon.observe(viewLifecycleOwner, moonResultObserver)
-
-        bindingMoonFragment.moonBtn.setOnClickListener {
-            dateToUnixDate(unixTime)
-            getMoonPhase(unixTime)
-        }
-    }
-
-    private fun dateToUnixDate(date: Long) {
-        Log.d("TTT", "${date}")
-    }
-
-    private fun getMoonPhase(dateUnix: Long) {
-        viewModel.getMoonPhase(dateUnix)
+        viewModel.moonImageResId.observe(viewLifecycleOwner, moonImageResultObserver)
     }
 
     override fun onDestroyView() {

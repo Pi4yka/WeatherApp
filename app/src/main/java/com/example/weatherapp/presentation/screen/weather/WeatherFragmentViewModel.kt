@@ -22,6 +22,9 @@ class WeatherFragmentViewModel(private val weatherRepo: WeatherRepository) : Vie
         MutableLiveData<WeatherModel>()
     }
 
+    init{
+    }
+
     fun getWeatherCity(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = weatherRepo.getCityWeather(

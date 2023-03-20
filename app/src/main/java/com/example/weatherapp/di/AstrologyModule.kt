@@ -10,6 +10,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val astrologyModule: Module = module {
+
     single { provideOkHttpClient() }
     factory { provideGson() }
     single {
@@ -28,4 +29,5 @@ val astrologyModule: Module = module {
             astrologyRepo = get()
         )
     }
+
 }

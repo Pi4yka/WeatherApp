@@ -10,29 +10,29 @@
         android:id="@+id/moonPhase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/moonBtn"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/moonAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/moonPhase"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/moonBtn"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/phaseMoonImage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moon Phase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/moonPhase"
+        app:layout_constraintTop_toBottomOf="@+id/moonAge"
+        tools:layout_editor_absoluteX="0dp"
+        tools:src="@drawable/full_moon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

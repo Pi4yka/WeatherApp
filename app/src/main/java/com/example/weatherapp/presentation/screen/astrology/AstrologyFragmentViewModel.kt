@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class AstrologyFragmentViewModel(private val astrologyRepo: AstrologyRepository) : ViewModel() {
 
-    val horoscope: MutableLiveData<AstrologyModel> by lazy {
+    val astrology: MutableLiveData<AstrologyModel> by lazy {
         MutableLiveData<AstrologyModel>()
     }
 
@@ -23,12 +23,15 @@ class AstrologyFragmentViewModel(private val astrologyRepo: AstrologyRepository)
                 sign = sign
             )) {
                 is RequestResult.Success -> {
-                    horoscope.postValue(response.data.toModel())
+                    astrology.postValue(
+                        response.data.toModel()
+                    ) // подписываться на модельку
                 }
                 is RequestResult.Error -> {
                     Log.d("TTT", response.message)
                 }
             }
+
         }
     }
 }
