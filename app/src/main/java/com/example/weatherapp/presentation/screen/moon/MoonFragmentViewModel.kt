@@ -60,6 +60,8 @@ class MoonFragmentViewModel(private val moonRepo: MoonRepository) : ViewModel() 
             "Waxing Crescent" -> R.drawable.waxing_crescent
             "Waxing Gibbous" -> R.drawable.waxxing_gibbous
             "Third Quarter" -> R.drawable.last_quarter
+            "Dark Moon" -> R.drawable.new_moon
+            "3rd Quarter" -> R.drawable.waxxing_gibbous
             else -> 0
         }
         moonImageResId.postValue(resId)
