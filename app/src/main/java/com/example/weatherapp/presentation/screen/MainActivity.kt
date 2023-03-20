@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val view = bindingMainActivity.root
         setContentView(view)
         setCurrentFragment(WeatherFragment())
-
+        supportActionBar?.hide()
         bindingMainActivity.bottomNavigationBar.setOnItemSelectedListener {
             when (it.itemId) {
                 bindingMainActivity.bottomNavigationBar.selectedItemId -> {}

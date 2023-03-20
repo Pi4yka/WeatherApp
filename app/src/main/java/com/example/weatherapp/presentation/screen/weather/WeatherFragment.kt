@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.weatherapp.R
@@ -76,7 +77,6 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
         }
         if (requireContext().checkLocationPermission()) { // 13 android v govne
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-//                Log.d("TTT", "${it.latitude} and ${it.longitude}")
                 if (it != null) {
                     viewModel.getWeatherLocation(
                         lat = it.latitude,

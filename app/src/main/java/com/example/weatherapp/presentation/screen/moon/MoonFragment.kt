@@ -34,7 +34,6 @@ class MoonFragment : Fragment(R.layout.moon_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val moonResultObserver = Observer<MoonModel> { moon ->
-            bindingMoonFragment.moonAge.text = moon.moonAge.toString()
             bindingMoonFragment.moonPhase.text = moon.moonPhase
         }
 
